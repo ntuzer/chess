@@ -6,16 +6,21 @@ require_relative 'Knight'
 require_relative 'Rook'
 require_relative 'Pawn'
 require_relative 'NullPiece'
+require_relative 'Display'
 
+require 'byebug'
 
 class Board
-  attr_reader
+  attr_reader :grid
 
   def initialize
     @grid = Array.new(8) { Array.new(8) }
     @null = NullPiece.instance
     populate
+  end
 
+  def in_bounds?(pos)
+    self[pos].nil?
   end
 
   def [](pos)
@@ -64,13 +69,20 @@ class Board
   def populate
 
     @grid = [
-      [Rook.new('red'), Knight.new('red'), Bishop.new('red'), King.new('red'), Queen.new('red'), Bishop.new('red'), Knight.new('red'), Rook.new('red')],
-      [Pawn.new('red'), Pawn.new('red'), Pawn.new('red'), Pawn.new('red'), Pawn.new('red'), Pawn.new('red'), Pawn.new('red'),Pawn.new('red')],
+      [Rook.new(:red), Knight.new(:red), Bishop.new(:red), King.new(:red), Queen.new(:red), Bishop.new(:red), Knight.new(:red), Rook.new(:red)],
+      [Pawn.new(:red), Pawn.new(:red), Pawn.new(:red), Pawn.new(:red), Pawn.new(:red), Pawn.new(:red), Pawn.new(:red),Pawn.new(:red)],
       [@null, @null, @null, @null, @null, @null, @null, @null],
       [@null, @null, @null, @null, @null, @null, @null, @null],
       [@null, @null, @null, @null, @null, @null, @null, @null],
       [@null, @null, @null, @null, @null, @null, @null, @null],
-      [Pawn.new('blue'), Pawn.new('blue'), Pawn.new('blue'), Pawn.new('blue'), Pawn.new('blue'), Pawn.new('blue'), Pawn.new('blue'),Pawn.new('blue')],
-      [Rook.new('blue'), Knight.new('blue'), Bishop.new('blue'), Queen.new('blue'), King.new('blue'), Bishop.new('blue'), Knight.new('blue'), Rook.new('blue')]]
+      [Pawn.new(:cyan), Pawn.new(:cyan), Pawn.new(:cyan), Pawn.new(:cyan), Pawn.new(:cyan), Pawn.new(:cyan), Pawn.new(:cyan),Pawn.new(:cyan)],
+      [Rook.new(:cyan), Knight.new(:cyan), Bishop.new(:cyan), King.new(:cyan), Queen.new(:cyan), Bishop.new(:cyan), Knight.new(:cyan), Rook.new(:cyan)]]
   end
 end
+
+
+
+b = Board.new
+# debugger
+d = Display.new(b)
+d.print_board
