@@ -38,7 +38,8 @@ class Board
   end
 
   def move_piece!(from_pos, to_pos)
-
+    @grid[from_pos][to_pos] = queen
+    queen.pos = [from_pos, to_pos]
   end
 
   def move_piece(from_pos, to_pos)
@@ -68,16 +69,21 @@ class Board
 
   def populate
 
-    @grid = [
-      [Rook.new(:red), Knight.new(:red), Bishop.new(:red), King.new(:red), Queen.new(:red), Bishop.new(:red), Knight.new(:red), Rook.new(:red)],
-      [Pawn.new(:red), Pawn.new(:red), Pawn.new(:red), Pawn.new(:red), Pawn.new(:red), Pawn.new(:red), Pawn.new(:red),Pawn.new(:red)],
-      [@null, @null, @null, @null, @null, @null, @null, @null],
-      [@null, @null, @null, @null, @null, @null, @null, @null],
-      [@null, @null, @null, @null, @null, @null, @null, @null],
-      [@null, @null, @null, @null, @null, @null, @null, @null],
-      [Pawn.new(:cyan), Pawn.new(:cyan), Pawn.new(:cyan), Pawn.new(:cyan), Pawn.new(:cyan), Pawn.new(:cyan), Pawn.new(:cyan),Pawn.new(:cyan)],
-      [Rook.new(:cyan), Knight.new(:cyan), Bishop.new(:cyan), King.new(:cyan), Queen.new(:cyan), Bishop.new(:cyan), Knight.new(:cyan), Rook.new(:cyan)]]
+    pieces = [Rook, Knight, Bishop, King, Queen, Bishop, Knight, Rook]
+    pieces.each_with_index do |piece, i |
+      @grid[0][i] = piece.new(:red, [0,i] )
+      @grid[1][i] = Pawn.new(:red, [1,i] )
+      @grid[6][i] = Pawn.new(:cyan, [6,i] )
+      @grid[7][i] = piece.new(:cyan, [7,i] )
+    end
+
+    4.times do |i|
+      8.times do |j|
+        @grid[i+2][j] = NullPiece.instance
+      end
+    end
   end
+
 end
 
 

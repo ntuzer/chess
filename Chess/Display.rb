@@ -11,11 +11,11 @@ class Display
   def print_board
     curs_pos = @cursor.cursor_pos
 
-    puts "-------------------------------------------------------------------------"
+    # puts "-------------------------------------------------------------------------"
     @board.grid.each_with_index do |row, j|
       #puts "|        |        |        |        |        |        |        |        |"
       row.each_with_index do |square, i|
-        print "|"
+        # print "|"
         empty= "        "
         if [j, i] == curs_pos
           background = :yellow
@@ -27,9 +27,9 @@ class Display
 
         print "#{empty.colorize(:background => background)}"
       end
-      puts "|"
+      puts ""
 
-      print "|"
+      print ""
       row.each_with_index do |square, i|
         tile = print_style(square)
 
@@ -41,12 +41,12 @@ class Display
           (i.even? || i == 0) ? background = :light_white : background = :light_black
         end
 
-        print "#{tile.colorize(:background => background)}|"
+        print "#{tile.colorize(:background => background)}"
       end
-      puts " "
+      puts ""
 
       row.each_with_index do |square, i|
-        print "|"
+        print ""
         empty= "        "
         if [j, i] == curs_pos
           background = :yellow
@@ -58,11 +58,11 @@ class Display
 
         print "#{empty.colorize(:background => background)}"
       end
-      puts "|"
+      puts ""
       #puts "|        |        |        |        |        |        |        |        |"
 
 
-      puts "-------------------------------------------------------------------------"
+      # puts "-------------------------------------------------------------------------"
     end
   end
 

@@ -2,8 +2,8 @@ require_relative "Piece"
 
 class Bishop < Piece
   attr_reader :color
-
-  def initialize(color)
-    super(color)
+  attr_accessor :pos
+  def initialize(color, pos)
+    super(color, pos)
   end
 end
